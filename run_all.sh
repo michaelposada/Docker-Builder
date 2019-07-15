@@ -37,5 +37,19 @@ rmdir DEPLOYMENTS/DEPLOYMENTS
 docker container rm $DEBIAN_9_ID
 echo "Shutting down container."
 
+echo "Starting Debian7 build"
+echo "Creating container"
+docker run --cidfile debian7_id.cid isa/debian7
+DEBIAN_7_ID=$(cat debian7_id.cid)
+rm debian7_id.cid
+echo "Copying package..."
+docker cp $DEBIAN_7_ID:/installSynApps/DEPLOYMENTS $(pwd)/DEPLOYMENTS/.
+mv DEPLOYMENTS/DEPLOYMENTS/* DEPLOYMENTS/.
+rmdir DEPLOYMENTS/DEPLOYMENTS
+docker container rm $DEBIAN_7_ID
+echo "Shutting down container."
+
+
 
 echo "Build Done. Tarballs placed in ./DEPLOYMENTS"
+

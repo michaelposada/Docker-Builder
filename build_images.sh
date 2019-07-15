@@ -13,3 +13,7 @@ cd ..
 cd Debian-9
 docker build -t isa/debian9 .
 cd ..
+
+cd Debian-7
+docker build -t isa/debian7 .
+cd ..
