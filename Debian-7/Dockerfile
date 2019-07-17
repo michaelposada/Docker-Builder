@@ -1,5 +1,6 @@
 # The Debian 7 builder
 FROM debian/eol:wheezy
+FROM python
 # get the important packages
 RUN apt-get update && apt-get upgrade -y && apt-get install python3-pip -y
 RUN apt-get -y install git wget tar make
@@ -8,8 +9,10 @@ RUN apt-get -y install libxext-dev libreadline-dev libx11-dev
 RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install python3-pip -y
-#RUN python3 -m pip install --upgrade pip
-#RUN python3 -m pip install distro
+RUN which pip3
+RUN pip --version
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install distro
 # copy the script
 COPY ./run_build.sh ./
 # run the script
