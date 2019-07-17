@@ -17,3 +17,7 @@ cd ..
 cd Debian-7
 docker build -t isa/debian7 .
 cd ..
+
+cd Windows
+docker build -t isa/windows .
+cd ..

@@ -49,6 +49,18 @@ rmdir DEPLOYMENTS/DEPLOYMENTS
 docker container rm $DEBIAN_7_ID
 echo "Shutting down container."
 
+echo "Starting Windows build"
+echo "Creating container"
+docker run --cidfile windows_id.cid isa/windows
+WINDOWS_ID=$(cat windows_id.cid)
+rm windows_id.cid
+echo "Copying package..."
+docker cp $WINDOWS_ID:/installSynApps/DEPLOYMENTS $(pwd)/DEPLOYMENTS/.
+mv DEPLOYMENTS/DEPLOYMENTS/* DEPLOYMENTS/.
+rmdir DEPLOYMENTS/DEPLOYMENTS
+docker container rm $WINDOWS_ID
+echo "Shutting down container."
+
 
 
 echo "Build Done. Tarballs placed in ./DEPLOYMENTS"
